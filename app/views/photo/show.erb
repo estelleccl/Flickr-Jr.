@@ -1,0 +1,52 @@
+<div class="container">
+  <%= erb :_nav_bar %>
+</div>  
+<div class="container">
+  <a href ="/album/<%= @album.id %>"><h2> Album Title: <%= @album.title.capitalize %> </h2></a>
+  <%  if login? %>
+      <form action="/photos/new" method="get">
+        <input type="hidden" name="id" value= "<%= @album.id %>">
+        <button class="mybutton1" value="submit">Upload</button>
+      </form>
+      <form action="/album/<%= @album.id %>" method="post">
+        <input type="hidden" name="_method" value="delete">
+        <button class="mybutton2" value="submit">Delete</button>
+      </form>
+    <% end %>
+</div>  
+<div class="container">
+  <br>
+  <% unless @all_photos.nil? %>
+  <div class="row">
+    <% @all_photos.each do |photo| %>
+    <div class="col-sm-6 col-md-4" style="height:480px">
+      <div class="thumbnail" style="height:450px">
+        <a href = "/albums/<%= photo.album_id %>/<%= photo.id %>"><img src="<%= photo.filename.thumb %>" alt="..."></a>
+        <div class="caption">
+          <a href = "/albums/<%= photo.album_id %>/<%= photo.id %>"><h3><%= photo.caption %></h3></a>
+          Posted by: <a href = "/users/<%= photo.album.user_id %>/albums"><p><%= photo.album.user.username %></p></a>
+          Posted on: <p><%= photo.created_at %></p>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+  <% end %>
+  <% unless @photo.nil? %>
+    <div class="thumbnail">
+      <a href = "/albums/<%= @photo.album_id %>/<%= @photo.id %>"><img src="<%= @photo.filename %>" alt="..."></a>
+      <br>
+      <%  if login? %>
+        <form action="/photo/<%= @photo.id %>" method="post">
+          <input type="hidden" name="_method" value="delete">
+          <button class="mybutton2" value="submit">Delete</button>
+        </form>
+      <% end %>
+      <div class="caption">
+        <a href = "/albums/<%= @photo.album_id %>/<%= @photo.id %>"><h3><%= @photo.caption %></h3></a>
+        Posted by: <a href = "/users/<%= @photo.album.user_id %>/albums"><p><%= @photo.album.user.username %></p></a>
+        Posted on: <p><%= @photo.created_at %></p>
+      </div>
+    </div>
+  <% end %>
+</div>

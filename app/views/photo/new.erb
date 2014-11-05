@@ -1,0 +1,17 @@
+<div class="container">
+    <%= erb :_nav_bar %>
+    <hr>
+  <h2> Upload Image Page</h2><br>
+  <h4> Album Title: <%= @album.title.capitalize %> <h4><br>
+  <form action='/photo' method="post" enctype="multipart/form-data">
+  	<input type="hidden" name="album_id" value= "<%= @album.id %>">
+    <ul>
+    	<div class="photo-upload-widget">
+        <li><input type="file" class="filename" name="filename"></li>
+      </div>
+      <br>
+    	Caption: <input type="text" name="caption"><br><br>
+        <input class="mybutton2" type="submit" value="Upload a Photo">
+    </ul>
+  </form>
+</div>

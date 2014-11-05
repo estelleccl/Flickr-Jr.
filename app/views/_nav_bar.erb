@@ -1,0 +1,12 @@
+  <br>
+  <a href="/"><input class="mybutton1" type="submit" value="Home"></a>
+  <% if login? %>
+  	<a href="/album"><input class="mybutton1" type="submit" value="Create Album"></a>
+  	<a href="/users/<%= session[:user_id] %>/albums"><input class="mybutton1" type="submit" value="My Albums"></a>&nbsp; 
+    <a href="/logout"><input class="mybutton2" type="submit" value="Logout"></a>
+    <div class="welcome_msg"> Welcome <%= username.capitalize %> &nbsp; </div>
+  	
+  <% else %>
+  	<a href="/signup_and_login"><input class="mybutton2" type="submit" value="SignUp/Login"></a>
+  <% end %>
+  <br>

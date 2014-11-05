@@ -1,0 +1,29 @@
+<div class="container">
+  <%= erb :_nav_bar %>
+  <div class="container1">
+    <h2> Album Title: <%= @album.title.capitalize %> </h2>
+    <form action='/photo' method="post" enctype="multipart/form-data">
+    	<input type="hidden" name="album_id" value= "<%= @album.id %>">
+      <ul>
+      	<%= erb :'/photo/_photo_upload', :layout => false %> <br>
+      	Caption: <input type="text" name="caption"><br><br>
+      	<input class="mybutton" type="submit" value="Upload a Photo">
+      </ul>
+    </form>
+  </div>
+  <br>
+  <div class="row">
+    <% @all_photos.each do |photo| %>
+    <div class="col-sm-6 col-md-4" style="height:480px">
+      <div class="thumbnail" style="height:450px">
+        <a href = "/albums/<%= photo.album_id %>/<%= photo.id %>"><img src="<%= photo.filename.thumb %>" alt="..."></a>
+        <div class="caption">
+          <a href = "/albums/<%= photo.album_id %>/<%= photo.id %>"><h3><%= photo.caption %></h3></a>
+          Posted by: <a href = "/users/<%= @album.user_id %>/albums"><p><%= photo.album.user.username %></p></a>
+          Posted on: <p><%= photo.created_at %></p>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+<div class="container">
+	<%= erb :_nav_bar %>
+</div>	
+<div class="container">
+  <h1>Welcome to Chang's Flickr!</h1>
+</div>
+<div class="container">
+  
+<br>
+<div class="row">
+  <% @all_photos.each do |photo| %>
+  <div class="col-sm-6 col-md-4" style="height:480px">
+    <div class="thumbnail" style="height:450px">
+      <a href = "/albums/<%= photo.album_id %>/<%= photo.id %>"><img src="<%= photo.filename.thumb %>" alt="..."></a>
+      <div class="caption">
+        <a href = "/albums/<%= photo.album_id %>/<%= photo.id %>"><h3><%= photo.caption.capitalize %></h3></a>
+        Album: <a href = "/album/<%= photo.album_id %>"><p><%= photo.album.title.capitalize %></p></a>
+        Posted by: <a href = "/users/<%= photo.album.user_id %>/albums"><p><%= photo.album.user.username.capitalize %></p></a>
+        Posted on: <p><%= photo.created_at %></p>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>
+</div>
+

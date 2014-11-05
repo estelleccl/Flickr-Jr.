@@ -1,0 +1,12 @@
+<%= image_tag painting.image_url(:thumb) if photo.image? %>
+<div class="images">
+  <% @photos.each do |photo| %>
+    <li><a href="/album/<%=photo.album_id%>"><img src="/../<%=photo.filename%>"></a></li>
+  <% end %>
+</div>
+
+@album= Album.create( title: params[:title], user_id: @user.id, description: params[:desc])
+
+
+ <%= erb :'/photo/_photo_upload', :layout => false %>
+    <!-- <button id="plus-photo" type="button"> + </button><br><br> -->
